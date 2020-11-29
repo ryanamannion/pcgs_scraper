@@ -20,7 +20,7 @@ and 61-70. That means that for each subcategory there are three pages to scrape 
 In order to ensure that a rogue error at a later step won't cause the user to lose all the data from scraping, which can
 take some time, the data is saved to a pickle file at the end of the preliminary scraping function, and before the 
 processing step that combines the data from the three bins into one lookup table. 
-This file is saved in the pcgs_prices directory using the date and time upon
+This file is saved in the pcgs_scraper directory using the date and time upon
 completion to name the file `pcgs_prices-DD-MM-YYY-HH:MM:SS.pkl`. It is a free table, or a list of dictionaries with 
 each list item representing a row, and each key:value pair representing the column. This file serves as the input to the 
 processing function, which merges rows with the same PCGS# to creates the final lookup table. 
@@ -56,7 +56,7 @@ each PCGS# in the final lookup table, but for now that is not implemented. See K
 
 1. Clone the repository to the directory of your choice with `$ git clone https://github.com/ryanamannion/pcgs_prices.git`
 
-2. Navigate to the pcgs_prices subdirectory
+2. Navigate to the pcgs_scraper subdirectory
 
 3. If you are using a venv or other environment, activate it
 
