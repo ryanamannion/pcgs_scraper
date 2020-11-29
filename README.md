@@ -22,8 +22,8 @@ take some time, the data is saved to a pickle file at the end of the preliminary
 processing step that combines the data from the three bins into one lookup table. 
 This file is saved in the pcgs_prices directory using the date and time upon
 completion to name the file `pcgs_prices-DD-MM-YYY-HH:MM:SS.pkl`. It is a free table, or a list of dictionaries with 
-each key representing the header row, and each value representing that cell. This file serves as the input to the 
-processing function, which merges rows with the same PCGS# to creates the lookup table. 
+each list item representing a row, and each key:value pair representing the column. This file serves as the input to the 
+processing function, which merges rows with the same PCGS# to creates the final lookup table. 
 The processing function saves it both as a pickle file and as a json file (because why not). These 
 files are saved to the same directory and named `pcgs_price_guide.{json, pkl}`
 
