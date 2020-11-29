@@ -1,4 +1,4 @@
-# pcgs_prices: Tools for scraping coin price information
+# pcgs_scraper: Tools for scraping coin price information
 
 Scrape current PCGS coin prices from https://www.pcgs.com/prices and save them to a lookup table for easy price lookup or
 other manipulation
