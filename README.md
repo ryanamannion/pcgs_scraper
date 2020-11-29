@@ -31,10 +31,10 @@ The data structure of the price guide lookup table is a dictionary. The keys are
 from the tables. 
 - pcgs_num: (str) PCGS Number
 - desig: (str) Designation (More info: https://www.pcgs.com/news/a-look-at-pcgs-designations)
-- prices: (dict) Price by grade, each grade points to a tuple (n=2) of prices (each a str). The top price in the table
-is index 0, the bottom is index 1. See Known Issues #1
-- merged_from: the three entries for each grade bin used to create this merged entry (see paragraph one of this section),
-retained for debugging purposes
+- prices: (dict) Price by grade, each grade points to a tuple (n=2) of prices (each a str). The top price in the table 
+  is index 0, the bottom is index 1. See Known Issues #1
+- merged_from: the three entries for each grade bin used to create this merged entry (see paragraph one of this section), 
+  retained for debugging purposes
 
 ```python
 merged_entry = {
@@ -70,7 +70,11 @@ each PCGS# in the final lookup table, but for now that is not implemented. See K
 4. To just turn unprocessed binary into a lookup table: `$ python pcgs_prices.py --process path/to/pcgs_prices-DD-MM-YYY-HH:MM:SS.pkl`
     * This saves two files: `pcgs_price_guide.{json, pkl}`, both are of the same object 
 
-### Known Issues:
+### Known Issues and Future Changes:
 
 1. Cases where there is only one price, and it is for the + designation are stored in the first place of the price double
-2. Descriptions are excluded from the final lookup table because they are too messy, but they are retained in the merged_from values
+2. Descriptions are excluded from the final lookup table because they are too messy, but they are retained in the 
+   merged_from values. The data scraped from the PCGS# database will eventually fill in for that information
+3. Most coin detail pages have MS as well as PR and sometimes other designations on a different page. Currently, only 
+   the MS prices are scraped for now. The other will be implemented shortly, it helps that they have different PCGS 
+   numbers
