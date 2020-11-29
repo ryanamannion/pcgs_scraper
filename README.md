@@ -1,4 +1,4 @@
-# pcgs_scraper: Tools for scraping coin data frpm PCGS
+# pcgs_scraper: Tools for scraping coin data from PCGS
 
 Scrape current PCGS coin prices from https://www.pcgs.com/prices and save them to a lookup table for easy price lookup or
 other manipulation
