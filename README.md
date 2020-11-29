@@ -21,11 +21,13 @@ In order to ensure that a rogue error at a later step won't cause the user to lo
 take some time, the data is saved to a pickle file at the end of the preliminary scraping function, and before the 
 processing step that combines the data from the three bins into one lookup table. 
 This file is saved in the pcgs_prices directory using the date and time upon
-completion to name the file `pcgs_prices-DD-MM-YYY-HH:MM:SS.pkl`. This file serves as the input to the processing 
-function, which creates the lookup table and saves it both as a pickle file and as a json file (because why not). These 
+completion to name the file `pcgs_prices-DD-MM-YYY-HH:MM:SS.pkl`. It is a free table, or a list of dictionaries with 
+each key representing the header row, and each value representing that cell. This file serves as the input to the 
+processing function, which merges rows with the same PCGS# to creates the lookup table. 
+The processing function saves it both as a pickle file and as a json file (because why not). These 
 files are saved to the same directory and named `pcgs_price_guide.{json, pkl}`
 
-The data structure of the price guide is a dictionary. The keys are the PCGS Numbers, and the values are data extracted
+The data structure of the price guide lookup table is a dictionary. The keys are the PCGS Numbers, and the values are data extracted
 from the tables. 
 - pcgs_num: (str) PCGS Number
 - desig: (str) Designation (More info: https://www.pcgs.com/news/a-look-at-pcgs-designations)
@@ -41,9 +43,10 @@ merged_entry = {
             'prices': price_by_grade,   # Price dictionary {Grade: [Price, Price+]}
             'merged_from': entries,     # History for merge, for debugging
         }
+price_guide[pcgs_num] = merged_entry
 ```
 
-Please Note: the description from the table is excluded in the final lookup table, it was too messy and I was under a
+NOTE: the description from the table is excluded in the final lookup table, it was too messy and I was under a
 time crunch to get this done. My goal is to scrape the PCGS number data from pcgs.com to have better descriptions for
 each PCGS# in the final lookup table, but for now that is not implemented. See Known Issues #2
 
