@@ -8,19 +8,18 @@ Author: Ryan A. Mannion, 2020
 github: ryanamannion
 twitter: @ryanamannion
 """
-import sys
 import json
 import time
 import pickle
 import argparse
-import requests
 from tqdm import tqdm
 from datetime import datetime
 from collections import defaultdict
 
 import ft
 from bs4 import BeautifulSoup
-from bs4.element import NavigableString
+
+from utils import request_page, non_ns_children
 
 INDEX = 'https://www.pcgs.com'
 PRICES = 'https://www.pcgs.com/prices'
@@ -29,59 +28,10 @@ grades = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25, 30, 35, 40, 45, 50, 53, 55, 58,
           60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70]
 
 
-#########
-# UTILS #
-#########
-def request_page(page_url):
-    """
-    Makes sure page is responding
-
-    :param page_url: url to request
-    :return: requested page if its working, error message with status if not
-    """
-    response = requests.get(page_url)
-    if response.status_code == 429:
-        # too many requests
-        retry_after = response.headers['retry-after']
-        print("Encountered response status 429: too many requests\n"
-              f"Waiting {retry_after}s and retrying...")
-        time.sleep(retry_after + 2)     # for good measure
-        print("Retrying...")
-        request_page(page_url)
-    elif not response.status_code == 200:
-        print(f'Something went wrong with {page_url}!\n'
-              f'Status code: {response.status_code}\n'
-              f'Status text:\n' + response.text)
-        sys.exit()
-    else:
-        return response
-
-
-def non_ns_children(tag, search_type):
-    """
-    Filters out NavigableString children from tree navigation, allows use of
-    .children and .descendants methods
-
-    :param tag: bs4.Tag object
-    :param search_type: string, {children, descendants}
-    :return: list of bs4.Tag objects
-    """
-    filtered = []
-    if search_type == 'children':
-        for child in tag.children:
-            if type(child) is not NavigableString:
-                filtered.append(child)
-    elif search_type == 'descendants':
-        for child in tag.descendants:
-            if type(child) is not NavigableString:
-                filtered.append(child)
-    return filtered
-
-
 ######################
 # SCRAPING FUNCTIONS #
 ######################
-def get_urls():
+def get_urls(page_url):
     """
     Gets urls for each subcategory on the /prices page, returns them as a
     dictionary where the keys are the categories, and the values are a tuple of
@@ -90,7 +40,7 @@ def get_urls():
     :return urls_by_category: (dict) dict of all urls on /prices page
     """
     # prep page html and soup
-    page = request_page(PRICES)
+    page = request_page(page_url)
     soup = BeautifulSoup(page.text, 'html.parser')
 
     urls_by_category = defaultdict(list)
@@ -203,7 +153,7 @@ def scrape_all():
 
     # Step 1
     print(f"Getting URLs from {PRICES}...")
-    urls_by_category = get_urls()
+    urls_by_category = get_urls(PRICES)
     print("Success!")
 
     # Step 2
