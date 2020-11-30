@@ -5,6 +5,8 @@
 Scrape current PCGS coin prices from https://www.pcgs.com/prices and save them to a lookup table for easy price lookup 
 or other manipulation
 
+This repo is not sponsored or endorsed by PCGS. Logo for stylistic purposes, following PCGS Brand Guidelines
+
 ## Requirements:
 
 - BeautifulSoup4: web scraping
