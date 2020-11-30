@@ -250,9 +250,14 @@ def merge_grade_bins(filepath):
         price_guide[pcgs_num] = merged_entry
 
     print('Saving price guide to pkl and json files...')
-    pickle.dump(price_guide, open('pcgs_price_guide.pkl', 'wb'))
-    with open('pcgs_price_guide.json', 'w') as outfile:
+    pickle.dump(price_guide, open('scraped_pcgs_prices.pkl', 'wb'))
+    with open('scraped_pcgs_prices.json', 'w') as outfile:
         json.dump(price_guide, outfile)
+
+
+def main():
+    save_file = scrape_all()
+    merge_grade_bins(save_file)
 
 
 if __name__ == "__main__":
@@ -269,8 +274,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.all is True:
-        save_file = scrape_all()
-        merge_grade_bins(save_file)
+        main()
     elif args.scrape_only is True:
         scrape_all()
     elif args.process is not None:
