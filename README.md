@@ -12,6 +12,8 @@ This repo is not sponsored or endorsed by PCGS. Logo for stylistic purposes, fol
 - BeautifulSoup4: web scraping
 - ft: free table utilities
 
+`$ pip install beautifulsoup4 ft`
+
 ## Design and Functionality
 
 ### `pcgs_scraper.py`
