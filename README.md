@@ -84,10 +84,6 @@ function from `pcgs_prices.py` to scrape URLs from the main page of the PCGS# lo
 Each subcategory URL is then followed and the number:description pair is scraped and stored in a free table and saved to
 `number_data.pkl`.
 
-NOTE: the description from the table is excluded in the final lookup table, it was too messy and I was under a
-time crunch to get this done. My goal is to scrape the PCGS number data from pcgs.com to have better descriptions for
-each PCGS# in the final lookup table, but for now that is not implemented. See Known Issues #2
-
 ## Detailed Usage Notes:
 
 ### Setup and Basic Usage
