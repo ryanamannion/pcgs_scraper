@@ -1,2 +1,5 @@
+# version 0.0.2
+* fixes import error stemming from the git repo, package, and file name being pcgs_scraper
+
 # version 0.0.1
 * first commit
