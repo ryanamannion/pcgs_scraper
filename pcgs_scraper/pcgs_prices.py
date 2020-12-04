@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 pcgs_prices.py
 
@@ -119,7 +120,7 @@ def get_prices(url, delay_s=1.5):
                             elif i == 2:        # cell 2 is the designation
                                 desig = cell.text.split()
                             elif 3 <= i <= 12:  # rest are prices
-                                this_cell_prices = cell.text.split()
+                                this_cell_prices = cell.text.strip('▲▼').split()
                                 # always make prices cell a double for ease
                                 # KNOWN ISSUE: in some rare cases, only one
                                 # price is shown and appears in the bottom row
@@ -175,7 +176,7 @@ def scrape_all():
     # Step 3
     today = datetime.now()
     current_time = today.strftime("%d-%m-%Y-%H:%M:%S")
-    filename = f'pcgs_prices_unprocessed-{current_time}.pkl'
+    filename = f'data/pcgs_prices_unprocessed-{current_time}.pkl'
     print(f"Saving price data to {filename}")
     pickle.dump(prices, open(filename, 'wb'))
     print(f"Success!")
@@ -250,8 +251,8 @@ def merge_grade_bins(filepath):
         price_guide[pcgs_num] = merged_entry
 
     print('Saving price guide to pkl and json files...')
-    pickle.dump(price_guide, open('scraped_pcgs_prices.pkl', 'wb'))
-    with open('scraped_pcgs_prices.json', 'w') as outfile:
+    pickle.dump(price_guide, open('data/scraped_pcgs_prices.pkl', 'wb'))
+    with open('data/scraped_pcgs_prices.json', 'w') as outfile:
         json.dump(price_guide, outfile)
 
 
