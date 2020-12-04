@@ -7,6 +7,8 @@ or other manipulation
 
 This repo is not sponsored or endorsed by PCGS. Logo for stylistic purposes, following PCGS Brand Guidelines
 
+If you use this repo, send me an email! I'd love to hear how you used it and what I can improve
+
 ## Quick Start
 
 ### Install locally to scrape and query prices
