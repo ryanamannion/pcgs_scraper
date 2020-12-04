@@ -18,7 +18,7 @@ git add pcgs_scraper/__init__.py CHANGELOG
 git status
 git commit -m "Start of dev for version X.Y.Z+1"
 
-git push origin master
+git push
 git push --tags
 # Go on to github and edit the pushed tag. Paste the CHANGELOG
 # in to make everyone happy. Publish the release.
