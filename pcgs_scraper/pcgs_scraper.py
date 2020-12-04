@@ -18,9 +18,9 @@ import json
 import pickle
 from os.path import isfile
 
-import pcgs_nums
-import pcgs_prices
-from utils import parse_descriptions
+import pcgs_scraper.pcgs_nums
+import pcgs_scraper.pcgs_prices
+from pcgs_scraper.utils import parse_descriptions
 
 
 def prompt(message):

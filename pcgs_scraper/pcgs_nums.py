@@ -14,8 +14,8 @@ import pickle
 from tqdm import tqdm
 from bs4 import BeautifulSoup
 
-from utils import non_ns_children, request_page
-from pcgs_prices import get_urls
+from pcgs_scraper.utils import non_ns_children, request_page
+from pcgs_scraper.pcgs_prices import get_urls
 
 URL = "https://www.pcgs.com"
 URL_NOLOOKUP = "https://www.pcgs.com/pcgsnolookup/"

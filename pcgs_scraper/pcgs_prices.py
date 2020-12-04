@@ -20,7 +20,7 @@ from collections import defaultdict
 import ft
 from bs4 import BeautifulSoup
 
-from utils import request_page, non_ns_children
+from pcgs_scraper.utils import request_page, non_ns_children
 
 INDEX = 'https://www.pcgs.com'
 PRICES = 'https://www.pcgs.com/prices'
