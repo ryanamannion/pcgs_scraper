@@ -7,25 +7,34 @@ or other manipulation
 
 This repo is not sponsored or endorsed by PCGS. Logo for stylistic purposes, following PCGS Brand Guidelines
 
-## Requirements:
+## Quick Start
 
-- BeautifulSoup4: web scraping
-- ft: free table utilities
+### Install locally to scrape and query prices
+1. Clone the repository to the directory of your choice with `$ git clone https://github.com/ryanamannion/pcgs_prices.git`
+2. Navigate to the pcgs_scraper subdirectory
+3. If you are using a venv or other environment, activate it
+4. `$ pip install .`
+5. `$ python scraper.py`
+6. `$ python pcgs_query.py -q '1909-S VDB Cent'`
 
-`$ pip install beautifulsoup4 ft`
+### Install with pip as a package
+1. Download the latest release from `Releases` on GitHub
+2. Activate your environment
+3. `$ pip install pcgs_scraper-X.Y.Z.tar.gz`
+4. Use pcgs_scraper functions in your own scripts
 
 ## Design and Functionality
 
-### `pcgs_scraper.py`
+### `scraper.py`
 
-`pcgs_scraper.py` is the main file in this library, and handles the dispatching of the scraping scripts. Additionally, this file handles postprocessing of those scraping scripts.
+`scraper.py` is the main file in this library, and handles the dispatching of the scraping scripts. Additionally, this file handles postprocessing of those scraping scripts.
 
 Running it from the command line calls the cli() function.
 The interface prompts the user to download the necessary files if they have not been scraped already. It will download
 both the PCGS#-->Description information from www.pcgs.com/pcgsnolookup as well as the PCGS#-->Price information from
 www.pcgs.com/prices. 
 
-`pcgs_scraper.py` then postprocesses that data and combines them to create a data-rich free table
+`scraper.py` then postprocesses that data and combines them to create a data-rich free table
 (list of dictionaries) where each list item represents a coin. The free table has details about each coin, including the PCGS Number, Year, Denomination, Mint Mark (if applicable), Detail information (e.g. Full Bands or other details relevant to that particular coin), Price data at time of scraping, and metadata for the purposes of debugging (e.g. the URL it was
 scraped from, etc.). 
 
@@ -111,7 +120,7 @@ results list (if there are more than one option) and the price data will be disp
 2. Navigate to the pcgs_scraper subdirectory
 3. If you are using a venv or other environment, activate it
 4. `$ pip install beautifulsoup4 ft`
-5. `$ python pcgs_scraper.py`
+5. `$ python scraper.py`
 6. `$ python pcgs_query.py -q '1909-S VDB Cent'`
 
 ### Running `pcgs_prices.py`
