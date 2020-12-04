@@ -85,9 +85,9 @@ def main():
             all_data.extend(subcat_data)
     print('Done with PCGS Number Data! Saving...')
 
-    pickle.dump(all_data, open('number_data.pkl', 'wb'))
+    pickle.dump(all_data, open('data/number_data.pkl', 'wb'))
 
-    print('Saved to number_data.pkl')
+    print('Saved to data/number_data.pkl')
 
 
 if __name__ == "__main__":
