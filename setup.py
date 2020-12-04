@@ -14,5 +14,5 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     packages=['pcgs_scraper'],
     python_requires='>=3.7',
-    install_requires=['beautifulsoup4', 'ft', 'nltk']
+    install_requires=['beautifulsoup4', 'ft', 'nltk', 'requests']
 )
