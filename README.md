@@ -99,7 +99,7 @@ results list (if there are more than one option) and the price data will be disp
 
 1. Always specify a year
 2. Always specify a denomination
-  * Can be of the form 1C, 3CS, 3 cent silver, $1, Dollar, half dollar, $2.50 etc.
+    * Can be of the form 1C, 3CS, 3 cent silver, $1, Dollar, half dollar, $2.50 etc.
 3. If you want to specify a mint mark, do so with a hyphen following the year, e.g. `-q '1909-S VDB Cent'`
 
 
