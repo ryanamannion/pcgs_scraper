@@ -10,18 +10,22 @@ This repo is not sponsored or endorsed by PCGS. Logo for stylistic purposes, fol
 ## Quick Start
 
 ### Install locally to scrape and query prices
-1. Clone the repository to the directory of your choice with `$ git clone https://github.com/ryanamannion/pcgs_prices.git`
-2. Navigate to the pcgs_scraper subdirectory
+1. Clone the repository to the directory of your choice with `$ git clone https://github.com/ryanamannion/pcgs_scraper.git`
+2. `$ cd pcgs_scraper`
 3. If you are using a venv or other environment, activate it
 4. `$ pip install .`
-5. `$ python scraper.py`
-6. `$ python pcgs_query.py -q '1909-S VDB Cent'`
+5. Navigate to the pcgs_scraper subdirectory
+6. `$ python scraper.py`
+7. `$ python pcgs_query.py -q '1909-S VDB Cent'`
 
 ### Install with pip as a package
 1. Download the latest release from `Releases` on GitHub
 2. Activate your environment
 3. `$ pip install pcgs_scraper-X.Y.Z.tar.gz`
 4. Use pcgs_scraper functions in your own scripts
+5. If you need to access the downloaded files:
+    * find directory with `$ pip list -v | grep pcgs`
+    * copy directory path and `cd` to it
 
 ## Design and Functionality
 
@@ -35,7 +39,9 @@ both the PCGS#-->Description information from www.pcgs.com/pcgsnolookup as well 
 www.pcgs.com/prices. 
 
 `scraper.py` then postprocesses that data and combines them to create a data-rich free table
-(list of dictionaries) where each list item represents a coin. The free table has details about each coin, including the PCGS Number, Year, Denomination, Mint Mark (if applicable), Detail information (e.g. Full Bands or other details relevant to that particular coin), Price data at time of scraping, and metadata for the purposes of debugging (e.g. the URL it was
+(list of dictionaries) where each list item represents a coin. The free table has details about each coin, including the 
+PCGS Number, Year, Denomination, Mint Mark (if applicable), Detail information (e.g. Full Bands or other details 
+relevant to that particular coin), Price data at time of scraping, and metadata for the purposes of debugging (e.g. the URL it was
 scraped from, etc.). 
 
 Please note, during this step entries from the price data which do not have a description from the number data are 
@@ -114,15 +120,6 @@ results list (if there are more than one option) and the price data will be disp
 
 ## Detailed Usage Notes:
 
-### Setup and Basic Usage
-
-1. Clone the repository to the directory of your choice with `$ git clone https://github.com/ryanamannion/pcgs_prices.git`
-2. Navigate to the pcgs_scraper subdirectory
-3. If you are using a venv or other environment, activate it
-4. `$ pip install beautifulsoup4 ft`
-5. `$ python scraper.py`
-6. `$ python pcgs_query.py -q '1909-S VDB Cent'`
-
 ### Running `pcgs_prices.py`
 1. To show help dialogue: `$ python pcgs_prices.py --help`
 2. To scrape all prices and clean up the data: `$ python pcgs_prices.py --all`
@@ -145,6 +142,8 @@ results list (if there are more than one option) and the price data will be disp
 
 1. Cases where there is only one price, and it is for the + designation are stored in the first place of the price 
    double
-3. Most coin detail pages have MS as well as PR and sometimes other designations on a different page. Currently, only 
+2. Most coin detail pages have MS as well as PR and sometimes other designations on a different page. Currently, only 
    the MS prices are scraped. The other will be implemented shortly, it helps that they have different PCGS 
    numbers
+3. I want to make it so you can specify a folder to save to, that way you can just do everything with pip and 
+   not mess with the whole `$ pip list -v | grep pcgs` nonsense
