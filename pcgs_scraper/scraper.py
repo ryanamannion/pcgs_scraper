@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-pcgs_scraper.py
+scraper.py
 
 Brings together PCGS# data scraped with pcgs_nums.py and price data from
 pcgs_prices.py to create single set of information containing:
