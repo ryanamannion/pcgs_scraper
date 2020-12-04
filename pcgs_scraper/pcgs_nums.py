@@ -78,7 +78,7 @@ def main():
     all_data = []
     print('Scraping PCGS Number Data...')
     for i, (category, subcategories) in enumerate(urls.items()):
-        print(f"\tStarting Category {i+1}/{len(urls.itmes())}: {category}...")
+        print(f"\tStarting Category {i+1}/{len(urls.items())}: {category}...")
         for subcat_name, subcat_url in tqdm(subcategories):
             time.sleep(1.0)
             subcat_data = scrape_nums(subcat_url)
