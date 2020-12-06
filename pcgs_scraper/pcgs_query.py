@@ -81,6 +81,8 @@ def rank_results(normalized_query, results):
     """
     Rank results by lowest-highest Levenshtein Edit Distance
 
+    v0.0.4: exact description match returns just that result
+
     :param normalized_query: query normalized (denom folded)
     :param results: results list from query_price_guide
     :return sorted_results: results sorted from lowest to highest edit distance
@@ -88,6 +90,8 @@ def rank_results(normalized_query, results):
     scores = []
     for result in results:
         score = edit_distance(normalized_query, result['description'])
+        if score == 0:      # exact match
+            return [result]
         scores.append((score, result))
     # sort scores by index 0, aka edit distance
     scores.sort(key=lambda x: x[0])
