@@ -21,7 +21,7 @@ from pcgs_scraper.utils import YEAR, DENOM_CI, MINT_CI       # regex
 from pcgs_scraper.utils import fold_denoms, price_table
 
 
-def validate_query(query_str):
+def validate_query(query_str, verbose=True):
     """
     Given a query, ensure it has a year and a denomination and extract them
 
@@ -44,11 +44,17 @@ def validate_query(query_str):
     if query_year is None:
         resp = 'I could not detect a year in your query, please make sure you' \
                ' include a year! e.g. 1997-P 25c'
-        sys.exit(resp)
+        if verbose:
+            sys.exit(resp)
+        else:
+            return None
     if query_denom is None:
         resp = 'I could not detect an acceptable denomination in your query, ' \
                'please make sure you include one! e.g. 1997-P 25c'
-        sys.exit(resp)
+        if verbose:
+            sys.exit(resp)
+        else:
+            return None
 
     year_match = query_year.group(0)
     denom_match = query_denom.group(0)
