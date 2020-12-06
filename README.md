@@ -142,10 +142,4 @@ results list (if there are more than one option) and the price data will be disp
 
 ## Known Issues and Future Changes:
 
-1. Cases where there is only one price, and it is for the + designation are stored in the first place of the price 
-   double
-2. Most coin detail pages have MS as well as PR and sometimes other designations on a different page. Currently, only 
-   the MS prices are scraped. The other will be implemented shortly, it helps that they have different PCGS 
-   numbers
-3. I want to make it so you can specify a folder to save to, that way you can just do everything with pip and 
-   not mess with the whole `$ pip list -v | grep pcgs` nonsense
+**You can find current issues and enhancement ideas in the [`Issues`](https://github.com/ryanamannion/pcgs_scraper/issues) tab of GitHub**
