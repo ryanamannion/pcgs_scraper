@@ -33,16 +33,15 @@ def request_page(page_url):
         retry_after = response.headers['retry-after']
         print("Encountered response status 429: too many requests\n"
               f"Waiting {retry_after}s and retrying...")
-        time.sleep(retry_after + 2)     # for good measure
+        time.sleep(int(retry_after) + 2)     # for good measure
         print("Retrying...")
-        request_page(page_url)
+        response = request_page(page_url)
     elif not response.status_code == 200:
         print(f'Something went wrong with {page_url}!\n'
               f'Status code: {response.status_code}\n'
               f'Status text:\n' + response.text)
         sys.exit()
-    else:
-        return response
+    return response
 
 
 def non_ns_children(tag, search_type):
