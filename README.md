@@ -6,7 +6,7 @@
 [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/ryanamannion/pcgs_scraper?include_prereleases)](https://github.com/ryanamannion/pcgs_scraper/releases)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ryanamannion/pcgs_scraper)](https://github.com/ryanamannion/pcgs_scraper)
 [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ryanamannion/pcgs_scraper/main)](https://github.com/ryanamannion/pcgs_scraper/commits/main)
-[![code quality](https://www.codefactor.io/repository/github/ryanamannion/pcgs_scraper/badge/main)](https://www.codefactor.io/repository/github/ryanamannion/pcgs_scraper/overview/main?color=brightgreen)
+[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/ryanamannion/pcgs_scraper?color=brightgreen)](https://github.com/ryanamannion/pcgs_scraper)
 
 Scrape current PCGS coin prices from https://www.pcgs.com/prices and save them to a lookup table for easy price lookup 
 or other manipulation
