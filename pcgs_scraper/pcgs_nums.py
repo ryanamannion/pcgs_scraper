@@ -21,6 +21,32 @@ URL = "https://www.pcgs.com"
 URL_NOLOOKUP = "https://www.pcgs.com/pcgsnolookup/"
 
 
+def scrape_coinfacts(coinfacts_url):
+    """
+
+    :param coinfacts_url:
+    :return:
+    """
+    page = request_page(coinfacts_url)
+    soup = BeautifulSoup(page.text, 'html.parser')
+    images_html = soup.find_all('img')
+    filtered_images = []
+    for image_html in images_html:
+        if 'alt' not in image_html.attrs.keys():
+            continue
+        alt = image_html.attrs['alt']
+        if "logo" in alt:
+            continue        # no logos
+        if "PCGS" in alt:
+            filtered_images.append(image_html)
+    # images = all images of the coin on this page
+    images = [(i.attrs['data-src'], i.attrs['alt'].strip()) for i in filtered_images]
+    # image = the large one on the page, i.e. the first one in the html
+    image = images[0]
+    narrative = soup.find(id="sectionNarrative").text
+    return {'image': image, 'images': images, 'narrative': narrative}
+
+
 def scrape_nums(url):
     """
     Scrape PCGS numbers from a single given pcgs.com/pcgsnolookup url
@@ -45,6 +71,7 @@ def scrape_nums(url):
                     if 'PCGS #' in cell.attrs['data-title']:
                         number_row = True       # set flag true
                         pcgs_num = cell.text.strip()
+                        coinfacts_url = URL + cell.contents[0].attrs['href']
                     elif 'Designation' in cell.attrs['data-title']:
                         designation = cell.text.strip()
                     elif 'Description' in cell.attrs['data-title']:
@@ -58,10 +85,15 @@ def scrape_nums(url):
                     # like a header
 
         if all_cells_filled:
+            coinfacts = scrape_coinfacts(coinfacts_url)
             row_cells = {
                 'pcgs_num': pcgs_num,
                 'desig': designation,
-                'description': description
+                'description': description,
+                'coinfacts_url': coinfacts_url,
+                'image': coinfacts['image'],
+                'images': coinfacts['images'],
+                'narrative': coinfacts['narrative']
             }
             rows.append(row_cells)
 
