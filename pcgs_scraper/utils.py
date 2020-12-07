@@ -57,11 +57,11 @@ def non_ns_children(tag, search_type):
     filtered = []
     if search_type == 'children':
         for child in tag.children:
-            if type(child) is not NavigableString:
+            if not isinstance(child, NavigableString):
                 filtered.append(child)
     elif search_type == 'descendants':
         for child in tag.descendants:
-            if type(child) is not NavigableString:
+            if not isinstance(child, NavigableString):
                 filtered.append(child)
     return filtered
 
@@ -353,4 +353,3 @@ def price_table(desig, prices_by_grade):
     table = header_row + midrule + body
 
     return table
-

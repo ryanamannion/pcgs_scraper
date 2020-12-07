@@ -29,9 +29,8 @@ def prompt(message):
         return True
     elif response.lower() in ['no', 'n', '0']:
         return False
-    else:
-        print('Response not recognized')
-        prompt(message)
+    print('Response not recognized')
+    prompt(message)
 
 
 def combine_number_price():
@@ -62,14 +61,14 @@ def combine_number_price():
         price_entry['coin_detail'] = detail
 
     coins_w_description = []        # free table
-    """
-    So here was the point when I realized there are about 3000 PCGS numbers in
-    the price guide that when you look them up on pcgs.com/pcgsnolookup it will
-    tell you:
-        (e.g.) The PCGS #2417 is not a valid US coin number.
-    ... huh?? So I did some digging and it looks like those may be the prices 
-    for different sets or type coins
-    """
+
+    # So here was the point when I realized there are about 3000 PCGS numbers in
+    # the price guide that when you look them up on pcgs.com/pcgsnolookup it
+    # will tell you:
+    #     (e.g.) The PCGS #2417 is not a valid US coin number.
+    # ... huh?? So I did some digging and it looks like those may be the prices
+    # for different sets or type coins
+
     for number, entry in price_guide.items():
         if 'description' in list(entry.keys()):
             coins_w_description.append(entry)

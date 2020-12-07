@@ -24,8 +24,8 @@ from pcgs_scraper.utils import request_page, non_ns_children
 
 INDEX = 'https://www.pcgs.com'
 PRICES = 'https://www.pcgs.com/prices'
-grade_bins = ['grades-1-20', 'grades-25-60', 'grades-61-70']
-grades = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25, 30, 35, 40, 45, 50, 53, 55, 58,
+BINS = ['grades-1-20', 'grades-25-60', 'grades-61-70']
+GRADES = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 25, 30, 35, 40, 45, 50, 53, 55, 58,
           60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70]
 
 
@@ -76,7 +76,6 @@ def get_prices(url, delay_s=1.5):
         in my testing, though I did not try any lower
     :return prices: a list of dictionaries representing each row in the table
     """
-    global grade_bins
 
     # 1: prep for task
     time.sleep(delay_s)
@@ -84,7 +83,7 @@ def get_prices(url, delay_s=1.5):
     soup = BeautifulSoup(page.text, 'html.parser')
 
     # 2: determine which grades we are dealing with in the table
-    for grade_bin in grade_bins:
+    for grade_bin in BINS:
         if grade_bin in url:
             grades = grade_bin
 
@@ -116,7 +115,6 @@ def get_prices(url, delay_s=1.5):
                                     pcgs_num = None
                             elif i == 1:        # cell 1 is the description
                                 description = cell.text.strip()
-                                pass
                             elif i == 2:        # cell 2 is the designation
                                 desig = cell.text.split()
                             elif 3 <= i <= 12:  # rest are prices
@@ -150,7 +148,6 @@ def scrape_all():
         Step 2: Load each URL and scrape prices from its table
         Step 3: Save price information to pickle
     """
-    global grade_bins
 
     # Step 1
     print(f"Getting URLs from {PRICES}...")
@@ -164,7 +161,7 @@ def scrape_all():
         print(f"\tBeginning category {i + 1}/{len(urls_by_category.items())}:"
               f" {category}")
         for subcat, subcat_url in tqdm(subcategories):
-            for grade_bin in grade_bins:
+            for grade_bin in BINS:
                 # url defaults to most-active page first, but we want all the
                 # grade information
                 this_bin_url = subcat_url.replace('most-active', grade_bin)
@@ -198,7 +195,6 @@ def merge_grade_bins(filepath):
     :param filepath: path to scraped data pkl from scrape_all
     :return price_guide: (dict) lookup table for
     """
-    global grades
     # NOTE: there will be a lot of entries with a None pcgs_num, these are
     # typically the prices for full type sets of a certain coin on the price
     # detail page, which this script currently does not account for. To get
@@ -231,10 +227,10 @@ def merge_grade_bins(filepath):
         for grade_bin in temp_order:
             for price in grade_bin:
                 this_num_prices.append(price)
-        assert len(this_num_prices) == len(grades), \
+        assert len(this_num_prices) == len(GRADES), \
             f'Wrong number of grades for PCGS#{pcgs_num}: ' \
             f'{len(this_num_prices)}'
-        price_by_grade = dict(zip(grades, this_num_prices))
+        price_by_grade = dict(zip(GRADES, this_num_prices))
 
         # 2: Ensure that the desig is always two place if at least one is
         merged_desig = []       # start with len == 0
