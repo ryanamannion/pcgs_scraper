@@ -45,22 +45,35 @@ def combine_number_price():
     print(f"Detailed PCGS # to description mapping contains "
           f"{len(pcgs_numbers)} entries")
 
+    # organize numbers data to be a dict that points from pcgs# to coin entry
     pcgs_number_lookup = {}
     for entry in pcgs_numbers:
         pcgs_number_lookup[entry['pcgs_num']] = entry
 
+    coins_w_price_and_detail = []
     for number, price_entry in price_guide.items():
         try:
+            # see if pcgsnolookup page data has a number for this coin
             detail = pcgs_number_lookup[number]
         except KeyError:
             # for debugging, see note below
             # print(f'KeyError for key: {number}', end=" ", flush=True)
             # print('continuing...')
             continue
-        price_entry['description'] = detail['description']
-        price_entry['coin_detail'] = detail
+        coin = {
+            'pcgs_num': price_entry['pcgs_num'],
+            'description': detail['description'],
+            'desig': price_entry['desig'],
+            'prices': price_entry['prices'],
+            'image': detail['image'],
+            'images': detail['images'],
+            'narrative': detail['narrative'],
+            'coinfacts_url': detail['coinfacts_url'],
+            'merged_from': [price_entry, detail]
+        }
+        coins_w_price_and_detail.append(coin)
 
-    coins_w_description = []        # free table
+        # free table
 
     # So here was the point when I realized there are about 3000 PCGS numbers in
     # the price guide that when you look them up on pcgs.com/pcgsnolookup it
@@ -69,11 +82,7 @@ def combine_number_price():
     # ... huh?? So I did some digging and it looks like those may be the prices
     # for different sets or type coins
 
-    for number, entry in price_guide.items():
-        if 'description' in list(entry.keys()):
-            coins_w_description.append(entry)
-
-    return coins_w_description
+    return coins_w_price_and_detail
 
 
 def cli():
