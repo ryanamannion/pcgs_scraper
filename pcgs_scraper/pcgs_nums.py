@@ -64,6 +64,7 @@ def scrape_nums(url, delay_s=25):
 
     :param url: (str) url to pcgsnolookup page
     :param delay_s: time to wait to avoid error code 429
+        this means that each subcategory will wait delay_s num of seconds
     :return rows: (list(dict)) free table of all rows containing pcgs_nums on
         this page
     """
