@@ -29,7 +29,7 @@ def scrape_coinfacts(url):
     :param coinfacts_url:
     :return:
     """
-    time.wait(2)
+    time.sleep(2)
     page = request_page(url)
     soup = BeautifulSoup(page.text, 'html.parser')
     images_html = soup.find_all('img')
