@@ -9,6 +9,8 @@ Author: Ryan A. Mannion, 2020
 github: ryanamannion
 twitter: @ryanamannion
 """
+import aiohttp
+import asyncio
 import time
 import pickle
 from tqdm import tqdm
@@ -21,13 +23,14 @@ URL = "https://www.pcgs.com"
 URL_NOLOOKUP = "https://www.pcgs.com/pcgsnolookup/"
 
 
-def scrape_coinfacts(coinfacts_url):
+def scrape_coinfacts(url):
     """
 
     :param coinfacts_url:
     :return:
     """
-    page = request_page(coinfacts_url)
+    time.wait(2)
+    page = request_page(url)
     soup = BeautifulSoup(page.text, 'html.parser')
     images_html = soup.find_all('img')
     filtered_images = []
@@ -40,21 +43,31 @@ def scrape_coinfacts(coinfacts_url):
         if "PCGS" in alt:
             filtered_images.append(image_html)
     # images = all images of the coin on this page
-    images = [(i.attrs['data-src'], i.attrs['alt'].strip()) for i in filtered_images]
     # image = the large one on the page, i.e. the first one in the html
-    image = images[0]
-    narrative = soup.find(id="sectionNarrative").text
+    images = [(i.attrs['data-src'], i.attrs['alt'].strip()) for i in filtered_images]
+    if len(images) != 0:
+        image = images[0]
+    else:       # no images on page
+        images = None
+        image = None
+    narrative_html = soup.find(id="sectionNarrative")
+    if narrative_html is None:
+        narrative = None
+    else:
+        narrative = narrative_html.text
     return {'image': image, 'images': images, 'narrative': narrative}
 
 
-def scrape_nums(url):
+def scrape_nums(url, delay_s=25):
     """
     Scrape PCGS numbers from a single given pcgs.com/pcgsnolookup url
 
     :param url: (str) url to pcgsnolookup page
+    :param delay_s: time to wait to avoid error code 429
     :return rows: (list(dict)) free table of all rows containing pcgs_nums on
         this page
     """
+    time.sleep(delay_s)
     page = request_page(url)
     soup = BeautifulSoup(page.text, 'html.parser')
     table_rows = soup.find_all('tr')
