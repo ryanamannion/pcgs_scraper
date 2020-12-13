@@ -107,7 +107,6 @@ def cli():
                 sys.exit()
 
         detailed_price_guide = combine_number_price()
-        parsed_price_guide = parse_descriptions(detailed_price_guide)
         msg = 'The PCGS Price Guide is complete. Would you like to save as a ' \
               'pickle file? This format is good for loading as a python ' \
               'object. y/n\n> '
