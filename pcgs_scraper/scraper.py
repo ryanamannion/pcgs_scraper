@@ -73,7 +73,8 @@ def combine_number_price():
         }
         coins_w_price_and_detail.append(coin)
 
-        # free table
+    # parse dscription and add year, denom, mint
+    coins_full_data = parse_descriptions(coins_w_price_and_detail)
 
     # So here was the point when I realized there are about 3000 PCGS numbers in
     # the price guide that when you look them up on pcgs.com/pcgsnolookup it
@@ -82,7 +83,7 @@ def combine_number_price():
     # ... huh?? So I did some digging and it looks like those may be the prices
     # for different sets or type coins
 
-    return coins_w_price_and_detail
+    return coins_full_data
 
 
 def cli():
