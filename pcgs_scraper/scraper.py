@@ -112,14 +112,14 @@ def cli():
               'object. y/n\n> '
         response = prompt(msg)
         if response:
-            pickle.dump(parsed_price_guide,
+            pickle.dump(detailed_price_guide,
                         open('data/pcgs_price_guide.pkl', 'wb'))
         msg = 'Would you like to save the PCGS Price Guide as a JSON file? ' \
               'y/n\n> '
         response = prompt(msg)
         if response:
             with open('data/pcgs_price_guide.json', 'w') as outfile:
-                json.dump(parsed_price_guide, outfile)
+                json.dump(detailed_price_guide, outfile)
     # if they do not, prompt to download them
     else:
         if not isfile('data/scraped_pcgs_prices.pkl'):
