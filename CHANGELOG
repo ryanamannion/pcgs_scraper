@@ -1,3 +1,10 @@
+# version 0.0.4
+* adds verbosity option for query for use in MakeCents
+* query exact match to description triggers return of that coin
+* updates to README docs
+* adds support for coinfacts narratives and images in number scraper
+* fixes bug that made response None after a http 429 wait period
+
 # version 0.0.3
 * fixes typo in pcgs_nums that prevented nums from scraping
 

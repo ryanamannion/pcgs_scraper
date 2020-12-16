@@ -1,1 +1,4 @@
-*/data/
+# .gitignore
+
+*__pycache__*
+*egg-info*
