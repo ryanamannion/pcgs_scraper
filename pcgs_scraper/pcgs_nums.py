@@ -9,8 +9,6 @@ Author: Ryan A. Mannion, 2020
 github: ryanamannion
 twitter: @ryanamannion
 """
-import aiohttp
-import asyncio
 import time
 import pickle
 from tqdm import tqdm
